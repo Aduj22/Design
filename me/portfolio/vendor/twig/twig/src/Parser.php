@@ -437,3 +437,4 @@ class Parser implements \Twig_ParserInterface
 }
 
 class_alias('Twig\Parser', 'Twig_Parser');
+

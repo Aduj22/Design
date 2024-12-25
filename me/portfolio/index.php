@@ -19,5 +19,23 @@ $pico = new Pico(
 // override configuration?
 //$pico->setConfig(array());
 
+$request_uri = $_SERVER['REQUEST_URI'];
+
+if (strpos($request_uri, 'css.md') !== false) {
+    // Parse the Markdown file
+    $parsedown = new Parsedown();
+    $markdownContent = file_get_contents(__DIR__ . '/css.md');
+    $htmlContent = $parsedown->text($markdownContent);  // Converts Markdown to HTML
+    
+    // Pass this HTML content to your Pico theme
+    // You can do this by setting it in the Pico environment or directly rendering the content
+    // Example (if you're passing it to the template engine):
+    $pico->set('content', $htmlContent);
+}
+
+$pico->setConfig(array(
+    'session' => $_SESSION
+));
+
 // run application
 echo $pico->run();
